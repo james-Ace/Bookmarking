@@ -2,5 +2,8 @@
 
 body{
   margin: 0;
+  background: var(--content-bg-color);
+  font-family: 'AlibabaPuHuiTi';
+  
 }
 

@@ -1,9 +1,13 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import HomeComponet from '../components/HomeComponet.vue'
+import AddComponet from '../components/AddBookComponet.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <HomeComponet />
+    <AddComponet></AddComponet>
   </main>
 </template>
+
+

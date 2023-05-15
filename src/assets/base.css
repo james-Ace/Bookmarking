@@ -1,3 +1,10 @@
 :root{
-  
+  --header-bg-color: #2196F3;
+  --content-bg-color: #edeff3;
+  --white-text-color: #fff;
+}
+
+@font-face {
+    font-family: 'AlibabaPuHuiTi';
+    src: url('./fonts/AlibabaPuHuiTi-2-55-Regular.ttf');
 }
