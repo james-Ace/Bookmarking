@@ -1,6 +1,6 @@
 <script>
 import { IconPlus } from '@arco-design/web-vue/es/icon';
-
+import { ajax } from '../assets/_bm'
 export default {
     components: { IconPlus },
     data() {
@@ -21,20 +21,7 @@ export default {
                 description: '',
                 user_id: ''
             },
-            categoryItem: [
-                {
-                    id: 0,
-                    name: ' '
-                },
-                {
-                    id: 1,
-                    name: '前端开发'
-                },
-                {
-                    id: 2,
-                    name: 'UI设计'
-                }
-            ]
+            categoryItem: []
 
         }
     },
@@ -50,25 +37,17 @@ export default {
         }
     },
     mounted() {
-        let res = fetch('http://127.0.0.1:5000/category?action=add',
-            {
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                method: 'POST',
-                data:{
-                    a: 'add'
-                }
-            })
 
-        res.then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-        }).then(res=>{
-            console.log(res);
+        let res = ajax('https://api.bromel.cn/api/links-sort/all')
+        let that = this
+        res.then(res=>{
+            that.categoryItem = res.data.data
+            console.log(res.data.data);
         })
+        .catch(err=>{
+            console.log(err);
+        })
+
     }
 };
 </script>
