@@ -1,13 +1,9 @@
-<script setup>
-import HomeComponet from '../components/HomeComponet.vue'
-import AddComponet from '../components/AddBookComponet.vue'
+<script>
+
 </script>
 
 <template>
   <main>
-    <HomeComponet />
-    <AddComponet></AddComponet>
+    <n-button>dd</n-button>
   </main>
 </template>
-
-

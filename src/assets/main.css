@@ -1,9 +1,8 @@
 @import './base.css';
 
 body{
-  margin: 0;
-  background: var(--content-bg-color);
-  font-family: 'AlibabaPuHuiTi';
-  
+    box-sizing: border-box;
+    margin: 0;
+    
+    background: #f8f8f8;
 }
-
