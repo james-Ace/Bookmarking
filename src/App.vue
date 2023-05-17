@@ -1,10 +1,11 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import Header from './components/header/HeaderComponent.vue'
-
+import Menu from './components/home/MenuComponent.vue'
 export default {
   components: {
-    Header
+    Header,
+    Menu
   }
 };
 </script>
@@ -19,7 +20,7 @@ export default {
 
     <a-layout class="body">
       <a-layout-sider class="asider">
-        
+        <Menu></Menu>
       </a-layout-sider>
 
       <a-layout-content class="content">
