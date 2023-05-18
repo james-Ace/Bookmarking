@@ -19,58 +19,59 @@ export default {
     </a-layout-header>
 
     <a-layout class="body">
-      <a-layout-sider class="asider">
-        <Menu></Menu>
-      </a-layout-sider>
+      <a-affix :offsetTop="80">
+        <a-layout-sider class="asider">
+          <Menu></Menu>
+        </a-layout-sider>
+      </a-affix>
 
-      <a-layout-content class="content">
+      <a-layout-content class="content" id="content">
         <RouterView />
       </a-layout-content>
     </a-layout>
+    
 
     <a-layout-footer class="footer">Footer</a-layout-footer>
   </a-layout>
 </template>
 
 <style scoped>
-.body{
-  
-}
+.body {}
 
-.header{
+.header {
   height: 180px;
   background: #31bafa;
   text-align: center;
 }
-.header div{
+
+.header div {
   display: flex;
   width: 80%;
   margin: 0 auto;
 }
 
 
-.body{
+.body {
   width: 70%;
   margin: 0 auto;
 }
 
 .body .asider,
-.body .content{
+.body .content {
   height: calc((100vh - 200px) - 60px);
   margin-top: 40px;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 0 20px;
 }
 
-.body .asider{
-  
+.body .asider {
+  padding: 0;
 }
 
-.body .content{
+.body .content {
   width: calc((100% - 200px));
+  height: 8000px;
 }
 
-.footer{}
-
-
+.footer {}
 </style>
