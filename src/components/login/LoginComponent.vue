@@ -17,6 +17,7 @@
 <script>
 import { store } from '../../store/store'
 import { getDate } from "../../assets/core";
+import { POST } from '@/utils/http/request'
 export default {
     data() {
         return {
