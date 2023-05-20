@@ -108,13 +108,15 @@ export default {
 .cardItems {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: start;
 }
 
 .groupItems {
   width: calc(100%/4.1);
   transition: .3s ease-in-out;
   position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .groupItems:hover {

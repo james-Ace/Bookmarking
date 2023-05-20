@@ -2,10 +2,15 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Header from './components/header/HeaderComponent.vue'
 import Menu from './components/home/MenuComponent.vue'
+import Login from "./components/login/LoginComponent.vue";
 export default {
   components: {
     Header,
-    Menu
+    Menu,
+    Login
+  },
+  methods:{
+    
   }
 };
 </script>
@@ -29,9 +34,12 @@ export default {
         <RouterView />
       </a-layout-content>
     </a-layout>
-    
 
-    <a-layout-footer class="footer">Footer</a-layout-footer>
+
+    <a-layout-footer class="footer">个人网络收藏夹  <Login></Login></a-layout-footer>
+
+
+
   </a-layout>
 </template>
 
@@ -70,8 +78,20 @@ export default {
 
 .body .content {
   width: calc((100% - 200px));
-  height: 8000px;
 }
 
-.footer {}
+.footer {
+  padding: 40px 0;
+  text-align: center;
+  margin-top: 40px;
+  color: #d3d3d3;
+}
+
+.footer :deep(.arco-btn-text){
+  color: #d3d3d3
+}
+.footer :deep(.arco-btn-text):hover{
+  background: transparent;
+  color: #000
+}
 </style>

@@ -1,18 +1,19 @@
-export const getDate = async (url, options)=>{
-    const api = 'https://api.bromel.cn/api/'+ url
-    
+export const getDate = async (url, options) => {
+    const api = 'https://api.bromel.cn/api/' + url
+
     const defaultOptions = {
         mode: 'cors'
     }
 
     let res = Object.assign(defaultOptions, options)
 
-
-    const ajax = await fetch(api, defaultOptions).then(response=>{ 
-        if(!response.ok){
-            return new Error('错了')
+    const ajax = await fetch(api, res).then(response => {
+        console.log(response);
+        if (response.ok) {
+            return response.json()
+            
         }
-        return response.json()
+        return new Error('出错了,来自getDate !response.ok 处')
     })
 
 
@@ -28,27 +29,44 @@ export const getDate = async (url, options)=>{
  * @param {*} jsonData 
  */
 export const _dispose_json = (jsonData) => {
-    
-    console.log(jsonData);
+    let category = []
+    let old = []
+    for (let i = 1; i < jsonData.length; i++) {
+        if(old.indexOf(jsonData[i].sort_id) != 0){
+            old.push(jsonData[i].sort_id)
+        }
+    }
+
+
+    for (let index = 0; index < old.length; index++) {
+        let temp = {id: old[index], data:[]}
+        for(let i = 0; i < jsonData.length; i++ ){
+            if(jsonData[i].sort_id == old[index]){
+                temp.data.push(jsonData[i])
+            }
+        } 
+        category.push(temp)
+    }
+    return category
 }
 
 /**
  * 
  */
-export const _copy = (item)=>{
-   const Text = item.name+','+item.url
-   let ok = false
-   navigator.permissions.query({ name: 'clipboard-write' }).then(result=>{
-    if(result.state === 'granted' || result.state === 'prompt'){
-        navigator.clipboard.writeText(Text).then(()=>{
-            
-        }).catch(
-            err => {
-                console.log('复制错误',err);
-            }
-        )
-    }
-   })
-   ok = true
-   return ok
+export const _copy = (item) => {
+    const Text = item.name + ',' + item.url
+    let ok = false
+    navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
+        if (result.state === 'granted' || result.state === 'prompt') {
+            navigator.clipboard.writeText(Text).then(() => {
+
+            }).catch(
+                err => {
+                    console.log('复制错误', err);
+                }
+            )
+        }
+    })
+    ok = true
+    return ok
 }

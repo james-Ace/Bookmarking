@@ -71,10 +71,21 @@ export default{
     }
   },
   mounted(){
+    
     getDate('links/all')
     .then(
       res => {
-        // _dispose_json(res.data.data);
+        let data = _dispose_json(res.data.data)
+        
+        for (let index = 0; index < data.length; index++) {
+          getDate(`links-sort/one?id=${data[index].id}`).then(
+            res => {
+              this.data[index].name = res.data.name
+              this.data[index].items = data[index].data
+            }
+          )
+          
+        }
       }
     )
   }

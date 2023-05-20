@@ -19,21 +19,36 @@ export default {
         },
         
         handleBeforeOk(){
-            console.log(this.form);
+
             getDate('links-sort/save',{
                 method: 'POST',
                 Body:{
-                    name: this.name,
-                    description: this.description
+                    name: this.form.name,
+                    description: this.form.description
+                },
+                Headers:{
+                    'Authorization': ''
                 }
+            }).then(res=>{
+                console.log(res);
             })
         }
     },
     mounted() {
+
         getDate('links-sort/all').then(
             res => {
-                this.menu = res.data.data
-                this.count = res.data.count
+                let menu = res.data.data
+                for (let index = 0; index < menu.length; index++) {
+                    getDate(`links-sort/links?id=${menu[index].id}`).then(
+                        res => {
+                            if(res.data.expand.count != 0){
+                                this.menu.push(menu[index])
+                                this.count = this.menu.length
+                            }
+                        }
+                    )
+                }
             }
         ).catch(
             error => {
@@ -45,20 +60,20 @@ export default {
 </script>
 
 <template>
-    <a-anchor class="innerNav" boundary="start" :smooth="true">
+    <a-anchor class="innerNav" boundary="start" :change-hash="false" :smooth="true">
         <a-anchor-link :href="'#'+item.name" v-for="item in menu">{{ item.name }}</a-anchor-link>
 
         <a-anchor-link v-if="login"><a-button @click="add" type="text" calss="add">添加分类</a-button></a-anchor-link>
     </a-anchor>
     <p class="text"> 一共有{{ count }}个分类 </p>
 
-    <a-modal v-model:visible="visible" title="添加分类" @cancel="handleCancel" @before-ok="handleBeforeOk">
+    <a-modal v-model:visible="visible" title="添加分类" @before-ok="handleBeforeOk">
         <a-form :model="form">
-            <a-form-item field="name" label="Name">
-                <a-input v-model="form.name" />
+            <a-form-item field="name" label="名称">
+                <a-input v-model="form.name" placeholder="填写分类名" />
             </a-form-item>
-            <a-form-item field="name" label="Name">
-                <a-textarea v-model="form.description" placeholder="Please enter something" allow-clear/>
+            <a-form-item field="description" label="描述">
+                <a-textarea v-model="form.description" placeholder="分类描述" allow-clear/>
             </a-form-item>
         </a-form>
     </a-modal>
